@@ -8,3 +8,5 @@ def index(request):
     return render(request, 'webapp/home.html')
 
 
+def register(request):
+    return render(request, 'webapp/register.html')
