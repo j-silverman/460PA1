@@ -10,3 +10,6 @@ def index(request):
 
 def register(request):
     return render(request, 'webapp/register.html')
+
+def login(request):
+    return render(request, 'webapp/login.html')
