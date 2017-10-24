@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.http import HttpResponse
+from webapp.forms import SubmitPerson
+from webapp.models import people
 
 def index(request):
     return render(request, 'webapp/home.html')
@@ -12,3 +14,24 @@ def register(request):
 
 def login(request):
     return render(request, 'webapp/login.html')
+
+def create_foo(request):
+    if request.method == 'POST':
+        form = SubmitPerson(request.POST)
+        if form.is_valid():
+            my_model = people()
+            my_model.first_name = request.POST.get('first_name','')
+            my_model.last_name = request.POST.get('last_name','')
+            my_model.email = request.POST.get('email', '')
+            my_model.home_town = request.POST.get('home_town', '')
+            my_model.gender = request.POST.get('gender', '')
+            my_model.password = request.POST.get('password', '')
+            my_model.date_of_birth = request.POST.get('date_of_birth','')
+            my_model.save()
+            return HttpResponse("submitted")
+        else:
+            form = SubmitPerson()
+            return HttpResponse("submitted")
+        return render(request, 'register.html',{
+                'form':form
+                })

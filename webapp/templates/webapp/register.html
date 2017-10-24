@@ -1,20 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <title>Register</title>
- <form>
+
+<body>
+
+
+ <form action="{% url 'register' %}" method="post"> {%csrf_token%}
   First name:<br>
-  <input type="text" name="firstname"><br>
+  <input type="text" name="first_name"/><br>
   Last name:<br>
-  <input type="text" name="lastname"><br>
+  <input type="text" name="last_name"/><br>
   Email:<br>
-  <input type="text" name="email"><br>
+  <input type="text" name="email"/><br>
   Home town:<br>
-  <input type="text" name="hometown"><br>
+  <input type="text" name="home_town"/><br>
   Gender:<br>
-  <input type="text" name="gender"><br>
+  <input type="text" name="gender"/><br>
   Password:<br>
-  <input type="text" name="Password"><br>
+  <input type="text" name="Password"/><br>
   Date of birth:<br>
-  <input type="text" name="dob">
+  <input type="text" name="date_of_birth"/>
+  <input type="submit" value="Submit"/>
 
 </form> 
+
+
+</body>
+
+
+</html>
