@@ -5,17 +5,19 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from webapp.forms import SubmitPerson
 from webapp.models import people
+from django.template import RequestContext, Context
+from django.shortcuts import render_to_response
 
 def index(request):
     return render(request, 'webapp/home.html')
 
-def register(request):
-    return render(request, 'webapp/register.html')
+#def register(request):
+    #return render(request, 'webapp/register.html')
 
 def login(request):
     return render(request, 'webapp/login.html')
 
-def create_foo(request):
+def register(request):
     if request.method == 'POST':
         form = SubmitPerson(request.POST)
         if form.is_valid():
@@ -29,9 +31,7 @@ def create_foo(request):
             my_model.date_of_birth = request.POST.get('date_of_birth','')
             my_model.save()
             return HttpResponse("submitted")
-        else:
-            form = SubmitPerson()
-            return HttpResponse("submitted")
-        return render(request, 'register.html',{
-                'form':form
-                })
+    else:
+        form = SubmitPerson()
+ 
+    return render(request, 'register.html')
