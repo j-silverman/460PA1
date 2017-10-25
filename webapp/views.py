@@ -2,36 +2,47 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.http import HttpResponse
-from webapp.forms import SubmitPerson
+from django.http import HttpResponse, HttpResponseRedirect
+from webapp.forms import SignUpForm
 from webapp.models import people
 from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
+from django.contrib.auth import login, authenticate
 
 def index(request):
-    return render(request, 'webapp/home.html')
+    return render(request, 'home.html')
 
 #def register(request):
     #return render(request, 'webapp/register.html')
 
-def login(request):
-    return render(request, 'webapp/login.html')
-
-def register(request):
+def user_login(request):
+    context = RequestContext(request)
     if request.method == 'POST':
-        form = SubmitPerson(request.POST)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password = password)
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect('/')
+            else:
+                return HttpResponse("Your account is disabled")
+        else:
+            return HttpResponse("Invalid username or password")
+    else:
+        return render(request, 'login.html', {})
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            my_model = people()
-            my_model.first_name = request.POST.get('first_name','')
-            my_model.last_name = request.POST.get('last_name','')
-            my_model.email = request.POST.get('email', '')
-            my_model.home_town = request.POST.get('home_town', '')
-            my_model.gender = request.POST.get('gender', '')
-            my_model.password = request.POST.get('password', '')
-            my_model.date_of_birth = request.POST.get('date_of_birth','')
-            my_model.save()
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=raw_password)
+            login(request, user)
             return HttpResponse("submitted")
     else:
-        form = SubmitPerson()
+        form = SignUpForm()
  
-    return render(request, 'register.html')
+    return render(request, 'register.html', {'form':form})
