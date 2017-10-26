@@ -8,6 +8,7 @@ from webapp.models import people
 from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
 
 def index(request):
     return render(request, 'home.html')
@@ -46,3 +47,7 @@ def signup(request):
         form = SignUpForm()
  
     return render(request, 'register.html', {'form':form})
+
+def profile(request):
+    args = {'user': request.user}
+    return render(request, 'profile.html', args)
