@@ -3,7 +3,11 @@
 {% endblock %}
 
 {% block body %}
-
-{{ user }}
-
+<div class="container">
+<p>
+	{{ user }}
+	{{user.last_name}}
+	<br> {{user.email}}
+</p>
+</div>
 {% endblock %}

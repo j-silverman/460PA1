@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name = 'signup'),
     url(r'^login/$', views.user_login, name = 'login'),
     url(r'^logged_out/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logged_out'),
-    url(r'^profile/$', views.profile, name='profile')
+    url(r'^profile/$', views.profile, name='profile'),
     ]

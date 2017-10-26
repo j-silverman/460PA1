@@ -16,7 +16,7 @@
     </style>
 
     <body>
-
+      {% if user.is_authenticated %}
       <!-- Sidebar -->
       <nav class="w3-sidebar w3-black w3-animate-top w3-xxlarge" style="display:none;padding-top:150px" id="mySidebar">
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-black w3-xxlarge w3-padding w3-display-topright" style="padding:6px 24px">
@@ -25,12 +25,12 @@
         <div class="w3-bar-block w3-center">
           <a href="{%url 'index' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Home</a>
           <a href="{%url 'login' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Logout</a>
-          <a href="{% url 'signup' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Register</a>
+          <a href="{% url 'profile' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Profile</a>
 
 
         </div>
       </nav>
-
+      {% else %}
       <nav class="w3-sidebar w3-black w3-animate-top w3-xxlarge" style="display:none;padding-top:150px" id="mySidebar">
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-black w3-xxlarge w3-padding w3-display-topright" style="padding:6px 24px">
           <i class="fa fa-remove"></i>
@@ -43,7 +43,7 @@
 
         </div>
       </nav>
-
+      {% endif %}
       <span class="w3-button w3-xxlarge w3-white w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></span>
         <h1>Login</h1>
 

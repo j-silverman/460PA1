@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'winstagram',
-        'USER': 'elimunn',
-        'PASSWORD': 'Phylostromy1',
+        'USER': 'root',
+        'PASSWORD': 'yankees2',
         'HOST':'localhost',
         'PORT':'',
     }

@@ -51,3 +51,4 @@ def signup(request):
 def profile(request):
     args = {'user': request.user}
     return render(request, 'profile.html', args)
+
