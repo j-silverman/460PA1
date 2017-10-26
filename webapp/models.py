@@ -12,3 +12,8 @@ class people(models.Model):
     password = models.CharField(max_length = 20)
     date_of_birth = models.DateField()
     
+
+class Photos(models.Model):
+    caption = models.CharField(max_length=255, blank=True)
+    photo_data = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)

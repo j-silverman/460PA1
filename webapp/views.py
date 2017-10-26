@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from webapp.forms import SignUpForm
-from webapp.models import people
+from webapp.forms import SignUpForm, PhotoForm
+from webapp.models import Photos
 from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
 from django.contrib.auth import login, authenticate
@@ -52,3 +52,13 @@ def profile(request):
     args = {'user': request.user}
     return render(request, 'profile.html', args)
 
+def model_form_upload(request):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save
+            return HttpResponseRedirect('profile')
+    else:
+        form = PhotoForm()
+    return render(request, 'model_form_upload.html', {'form':form})
+    

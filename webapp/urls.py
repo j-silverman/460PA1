@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^login/$', views.user_login, name = 'login'),
     url(r'^logged_out/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logged_out'),
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/upload$', views.model_form_upload, name = 'upload')
     ]

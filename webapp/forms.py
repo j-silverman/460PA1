@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from models import Photos
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length = 20)
@@ -13,3 +14,9 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name','last_name','email','home_town','gender','date_of_birth','password1','password2')
+        
+class PhotoForm(forms.ModelForm):
+    class Meta:
+        model = Photos
+        fields = ('caption','photo_data')
+        
