@@ -57,7 +57,7 @@ def model_form_upload(request):
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save
-            return HttpResponseRedirect('profile')
+            return HttpResponseRedirect('')
     else:
         form = PhotoForm()
     return render(request, 'model_form_upload.html', {'form':form})
