@@ -3,6 +3,47 @@
 {% block content %}
   <h2>Sign up</h2>
   <form method="post">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+    body,h1 {font-family: "Montserrat", sans-serif}
+    img {margin-bottom: -7px}
+    .w3-row-padding img {margin-bottom: 12px}
+    </style>
+
+    <nav class="w3-sidebar w3-black w3-animate-top w3-xxlarge" style="display:none;padding-top:150px" id="mySidebar">
+      <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-black w3-xxlarge w3-padding w3-display-topright" style="padding:6px 24px">
+        <i class="fa fa-remove"></i>
+      </a>
+      <div class="w3-bar-block w3-center">
+        <a href="{%url 'index' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Home</a>
+        <a href="{%url 'login' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Logout</a>
+        <a href="{% url 'signup' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Register</a>
+
+
+      </div>
+    </nav>
+
+    <nav class="w3-sidebar w3-black w3-animate-top w3-xxlarge" style="display:none;padding-top:150px" id="mySidebar">
+      <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-black w3-xxlarge w3-padding w3-display-topright" style="padding:6px 24px">
+        <i class="fa fa-remove"></i>
+      </a>
+      <div class="w3-bar-block w3-center">
+        <a href="{%url 'index' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Home</a>
+        <a href="{%url 'login' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Login</a>
+        <a href="{% url 'signup' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Register</a>
+
+
+      </div>
+    </nav>
+
+    <span class="w3-button w3-xxlarge w3-white w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    
     {% csrf_token %}
     {% for field in form %}
       <p>
@@ -18,4 +59,26 @@
     {% endfor %}
     <button type="submit">Sign up</button>
   </form>
+
+  <script>
+  // Toggle grid padding
+  function myFunction() {
+      var x = document.getElementById("myGrid");
+      if (x.className === "w3-row") {
+          x.className = "w3-row-padding";
+      } else {
+          x.className = x.className.replace("w3-row-padding", "w3-row");
+      }
+  }
+
+  // Open and close sidebar
+  function w3_open() {
+      document.getElementById("mySidebar").style.width = "100%";
+      document.getElementById("mySidebar").style.display = "block";
+  }
+
+  function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+  }
+  </script>
 {% endblock %}
