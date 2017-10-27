@@ -56,7 +56,9 @@ def model_form_upload(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save
+            stock = form.save(commit=False)
+            stock.author = request.user
+            stock.save()
             return HttpResponseRedirect('')
     else:
         form = PhotoForm()
