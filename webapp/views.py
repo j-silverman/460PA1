@@ -53,9 +53,10 @@ def profile(request, username):
     
     documents = Photos.objects.all()
     user = User.objects.get(username=username)
+    cuser = User.objects.get(username=request.user)
     friend = Friend.objects.get(current_user=request.user)
     friends = friend.users.all()
-    args = {'documents':documents, 'user': user, 'friends':friends}
+    args = {'documents':documents, 'user': user, 'friends':friends, 'cuser':cuser}
     return render(request, 'profile.html', args)
 
 #def get_user_profile(request):

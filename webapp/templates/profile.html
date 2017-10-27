@@ -9,7 +9,17 @@
     {{user.last_name}}
     <br> {{user.email}}
     <br>
-    <a href="{%url 'upload' %}"> Upload A Photo </a>
+    {% if user == cuser %}
+        <a href="{%url 'upload' %}"> Upload A Photo </a>
+    {% else %}
+        {% if user in friends %}
+            Unfriend
+        {% else %}
+            <a href="{% url 'change_friends' operation='add'  pk=user.pk %}">
+            <button type="button" class="btn btn-default">Send Friend Request</button>
+            </a>
+        {% endif %}
+    {% endif %}
 </p>
 </div>  
     {% if documents %}
@@ -26,9 +36,13 @@
     {% endif %}
 
     <h2>Friends</h2>
+    {% if user == cuser %}
         {% for friend in friends %}
         <a href="{% url 'profile' username=friend %}">
             <h3>{{ friend.username }}</h3>
         </a>
     {% endfor %}
+    {% else %}
+        These are the friends
+    {% endif %}
 {% endblock %}
