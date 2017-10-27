@@ -28,4 +28,10 @@
     {% else %}
         <p>No documents.</p>
     {% endif %}
+    <h2>Friends</h2>
+    	{% for friend in friends %}
+    	<a href="{% url 'profile' username=friend %}">
+    		<h3>{{ friend.username }}</h3>
+    	</a>
+    {% endfor %}
 {% endblock %}

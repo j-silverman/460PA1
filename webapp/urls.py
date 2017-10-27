@@ -13,6 +13,7 @@ urlpatterns = [
     #url(r'^profile/$', views.profile, name='profile'),
     url(r'^profile/upload$', views.model_form_upload, name = 'upload'),
     url(r'^profile/(?P<username>[a-zA-Z0-9]+)$', views.profile, name='profile'),
+    url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', views.change_friends, name= 'change_friends')
     ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
