@@ -50,7 +50,7 @@ def signup(request):
     return render(request, 'register.html', {'form':form})
 
 def profile(request, username):
-    
+
     documents = Photos.objects.all()
     user = User.objects.get(username=username)
     friend = Friend.objects.get(current_user=request.user)
@@ -59,7 +59,7 @@ def profile(request, username):
     return render(request, 'profile.html', args)
 
 #def get_user_profile(request):
-    
+
 
 def model_form_upload(request):
     if request.method == 'POST':
@@ -80,5 +80,3 @@ def change_friends(request, operation, pk):
     elif operation == 'remove':
         Friend.lose_friend(request.user, new_friend)
     return HttpResponseRedirect('')
-    
-
