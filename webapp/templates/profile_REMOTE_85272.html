@@ -1,0 +1,15 @@
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<p>
+	{{ user }}
+	{{user.last_name}}
+	<br> {{user.email}}
+	<br>
+	<a href="{%url 'upload' %}"> Upload A Photo </a>
+</p>
+</div>
+{% endblock %}
