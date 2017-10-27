@@ -49,8 +49,9 @@ def signup(request):
     return render(request, 'register.html', {'form':form})
 
 def profile(request):
-    args = {'user': request.user}
-    return render(request, 'profile.html', args)
+    #args = {'user': request.user}
+    documents = Photos.objects.all()
+    return render(request, 'profile.html', {'documents':documents, 'user':request.user})
 
 def model_form_upload(request):
     if request.method == 'POST':
