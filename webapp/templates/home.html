@@ -24,7 +24,7 @@ img {margin-bottom: -7px}
     <a href="{%url 'index' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Home</a>
     
     <a href="{%url 'logged_out' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Logout</a>
-    <a href="{% url 'profile' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Profile</a>
+    <a href="{% url 'profile' username=user %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Profile</a>
 
 
   </div>

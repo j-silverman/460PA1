@@ -10,8 +10,9 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name = 'signup'),
     url(r'^login/$', views.user_login, name = 'login'),
     url(r'^logged_out/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logged_out'),
-    url(r'^profile/$', views.profile, name='profile'),
-    url(r'^profile/upload$', views.model_form_upload, name = 'upload')
+    #url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/upload$', views.model_form_upload, name = 'upload'),
+    url(r'^profile/(?P<username>[a-zA-Z0-9]+)$', views.profile, name='profile'),
     ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
