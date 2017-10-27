@@ -45,7 +45,7 @@ def signup(request):
             return HttpResponse("submitted")
     else:
         form = SignUpForm()
- 
+
     return render(request, 'register.html', {'form':form})
 
 def profile(request):
@@ -63,4 +63,3 @@ def model_form_upload(request):
     else:
         form = PhotoForm()
     return render(request, 'model_form_upload.html', {'form':form})
-    
