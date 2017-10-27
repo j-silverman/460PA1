@@ -11,7 +11,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 
 def index(request):
-    return render(request, 'home.html')
+    args = {'user': request.user}
+    return render(request, 'home.html', args)
 
 #def register(request):
     #return render(request, 'webapp/register.html')
@@ -48,9 +49,13 @@ def signup(request):
 
     return render(request, 'register.html', {'form':form})
 
-def profile(request):
-    args = {'user': request.user}
-    return render(request, 'profile.html', args)
+def profile(request, username):
+    #args = {'user': request.user}
+    documents = Photos.objects.all()
+    return render(request, 'profile.html', {'documents':documents, 'user':User.objects.get(username=username)})
+
+#def get_user_profile(request):
+    
 
 def model_form_upload(request):
     if request.method == 'POST':

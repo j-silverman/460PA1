@@ -69,6 +69,26 @@
 	{{user.last_name}}
 	<br> {{user.email}}
 	<br>
+	{% if user.is_authenticated %}
 	<a href="{%url 'upload' %}"> Upload A Photo </a>
+	<br>
+	Friend {{user.get_username}}
+	{% endif %}
 </p>
 </div>
+<<<<<<< HEAD
+=======
+    {% if documents %}
+        <ul>
+        {% for document in documents %}
+        	{% if document.author == user %}
+        	<img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded">
+            </a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No documents.</p>
+    {% endif %}
+{% endblock %}
+>>>>>>> origin/master
