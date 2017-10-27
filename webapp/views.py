@@ -46,7 +46,7 @@ def signup(request):
             return HttpResponse("submitted")
     else:
         form = SignUpForm()
- 
+
     return render(request, 'register.html', {'form':form})
 
 def profile(request, username):
@@ -72,6 +72,7 @@ def model_form_upload(request):
     else:
         form = PhotoForm()
     return render(request, 'model_form_upload.html', {'form':form})
+<<<<<<< HEAD
 
 def change_friends(request, operation, pk):
     new_friend = User.objects.get(pk=pk)
@@ -81,3 +82,5 @@ def change_friends(request, operation, pk):
         Friend.lose_friend(request.user, new_friend)
     return HttpResponseRedirect('')
     
+=======
+>>>>>>> 36dd6328007f66af301ababf4ff5126fde1a6930

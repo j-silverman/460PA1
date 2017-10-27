@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'winstagram',
-        'USER': 'root',
-        'PASSWORD': 'yankees2',
+        'USER': 'elimunn',
+        'PASSWORD': 'Phylostromy1',
         'HOST':'localhost',
         'PORT':'',
     }
@@ -127,4 +127,3 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
