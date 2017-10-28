@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Winstagram</title>
@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
-
-    </style>
 
     <body>
       {% if user.is_authenticated %}
@@ -37,23 +33,10 @@
           <a href="{%url 'index' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Home</a>
           <a href="{%url 'login' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Login</a>
           <a href="{% url 'signup' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Register</a>
-
-
         </div>
       </nav>
       {% endif %}
       <span class="w3-button w3-xxlarge w3-white w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></span>
-        <h1>Login</h1>
-
-        <form method="post">
-            {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
-            <br />
-            Password: <input type="password" name="password" value="" size="50" />
-            <br />
-
-            <input type="submit" value="submit" />
-        </form>
 
         <script>
 
@@ -69,65 +52,10 @@
         }
         </script>
 
-    </body>
-</html> -->
+      </body>
 
 
 
-
-
-
-
-
-
-
-<!DOCTYPE html>
-
-
-
-
-<html>
-    <head>
-        <title>Winstagram</title>
-    </head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <body>
-      {% if user.is_authenticated %}
-      <! Sidebar >
-      <nav class="w3-sidebar w3-black w3-animate-top w3-xxlarge" style="display:none;padding-top:150px" id="mySidebar">
-        <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-black w3-xxlarge w3-padding w3-display-topright" style="padding:6px 24px">
-          <i class="fa fa-remove"></i>
-        </a>
-        <div class="w3-bar-block w3-center">
-          <a href="{%url 'index' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Home</a>
-          <a href="{%url 'logged_out' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Logout</a>
-          <a href="{% url 'profile' username=user %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Profile</a>
-
-
-        </div>
-      </nav>
-
-        {% else %}
-        <nav class="w3-sidebar w3-black w3-animate-top w3-xxlarge" style="display:none;padding-top:150px" id="mySidebar">
-          <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-black w3-xxlarge w3-padding w3-display-topright" style="padding:6px 24px">
-            <i class="fa fa-remove"></i>
-          </a>
-          <div class="w3-bar-block w3-center">
-            <a href="{%url 'index' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Home</a>
-            <a href="{%url 'login' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Login</a>
-            <a href="{% url 'signup' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Register</a>
-
-
-          </div>
-
-        </nav>
-        {% endif %}
 
 <style>
     @import url(https://fonts.googleapis.com/css?family=Roboto:300);
@@ -139,7 +67,7 @@
     }
     .form {
       position: relative;
-      z-index: 1;
+      /*z-index: 9999;*/
       background: #FFFFFF;
       max-width: 360px;
       margin: 0 auto 100px;
@@ -172,7 +100,7 @@
     }
     .container {
       position: relative;
-      z-index: 1;
+      /*z-index: 1;*/
       max-width: 300px;
       margin: 0 auto;
     }
@@ -258,22 +186,19 @@
 
 <script>
 
+function w3_open() {
+    document.getElementById("mySidebar").style.width = "100%";
+    document.getElementById("mySidebar").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+
   $('.message a').click(function(){
      $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
   });
-
-
-
-  // Open and close sidebar
-  function w3_open() {
-      document.getElementById("mySidebar").style.width = "100%";
-      document.getElementById("mySidebar").style.display = "block";
-  }
-
-  function w3_close() {
-      document.getElementById("mySidebar").style.display = "none";
-  }
-  </scrip
 
 </script>
 
