@@ -75,11 +75,13 @@ def model_form_upload(request):
     return render(request, 'model_form_upload.html', {'form':form})
 
 def change_friends(request, operation, pk):
+    user = User.objects.get(username=request.user)
+    args = {'user': user}
     new_friend = User.objects.get(pk=pk)
     if operation == 'add':
         Friend.make_friend(request.user, new_friend)
     elif operation == 'remove':
         Friend.lose_friend(request.user, new_friend)
-    return HttpResponseRedirect('')
+    return render(request, 'home.html', args)
     
 
