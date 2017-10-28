@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from webapp.models import Photos, Friend
+from webapp.models import Photos, Friend, Album
 
 # Register your models here.
 
@@ -17,3 +17,5 @@ class PhotoAdmin(admin.ModelAdmin):
 admin.site.register(Photos, PhotoAdmin)
 
 admin.site.register(Friend)
+
+admin.site.register(Album)

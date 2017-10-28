@@ -10,7 +10,8 @@
     <br> {{user.email}}
     <br>
     {% if user == cuser %}
-        <a href="{%url 'upload' %}"> Upload A Photo </a>
+        <a href="{%url 'upload' %}"> Upload A Photo </a><br>
+        <a href="{% url 'album_up' %}"> Create an album </a>
     {% else %}
         {% if user in friends %}
             <a href="{% url 'change_friends' operation='remove'  pk=user.pk %}">
@@ -28,7 +29,7 @@
         <ul>
         {% for document in documents %}
             {% if document.author == user %}
-            <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded">
+            <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
             </a></li>
             {% endif %}
         {% endfor %}
@@ -37,18 +38,30 @@
         <p>No documents.</p>
     {% endif %}
 
+
     <h2>Friends</h2>
     {% if user == cuser %}
         {% for friend in friends %}
-        <a href="{% url 'profile' username=friend %}">
+        <a href="{% url 'profile' username=friend %}" >
             <h3>{{ friend.username }}</h3>
         </a>
+
     {% endfor %}
-<<<<<<< HEAD
-{% endblock %}
-=======
+
     {% else %}
+
         These are the friends
     {% endif %}
+
+    <h2>Albums </h2>
+    {% if albums %}
+        {% for album in albums %}
+        <a href="{% url 'album' album_name=album.album_name %}">
+            <h3>{{ album.album_name }}</h3></a>
+        {% endfor %}
+    {% else %}
+        <p> no albums </p>
+    {% endif %}
+
 {% endblock %}
->>>>>>> origin/master
+
