@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^profile/(?P<username>[a-zA-Z0-9]+)$', views.profile, name='profile'),
     url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', views.change_friends, name= 'change_friends'),
     url(r'album/$', views.album_upload, name = 'album_up'),
-    url(r'^profile/(?P<album_name>[a-zA-Z0-9]+)$', views.album_list, name = 'album_list')
+    url(r'^album/(?P<username>[a-zA-Z0-9]+)$', views.album_list, name = 'album_list')
     ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

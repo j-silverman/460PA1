@@ -24,7 +24,7 @@ class PhotoForm(forms.ModelForm):
 class AlbumForm(forms.ModelForm):
     class Meta:
         model = Album
-        fields = ['album_name','photo_id']
+        fields = ['album_name']
         
     #def __init__(self, *args, **kwargs):
      #   super(AlbumForm, self).__init__(*args, **kwargs)

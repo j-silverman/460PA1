@@ -86,6 +86,15 @@ def album_upload(request):
         form = AlbumForm()
     return render(request, 'album_upload.html', {'form':form})
 
+def album_list(request, username):
+    user = User.objects.get(username=username)
+    documents = Photos.objects.all()
+    #albums = Album.objects.all()
+    albums = Album.objects.filter(a_author = user)
+    args = {'user':user, 'documents':documents, 'albums': albums}
+    return render(request, 'album_list.html', args)
+
+
 def change_friends(request, operation, pk):
     user = User.objects.get(username=request.user)
     args = {'user': user}

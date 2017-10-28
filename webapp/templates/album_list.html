@@ -1,0 +1,12 @@
+<h1> Albums <h1>
+{% for album in albums %}
+	{{ album.album_name }}
+	<br>
+	{% for document in documents %}
+
+		{% if document.album_id.id == album.id %}
+		<img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
+		{% endif %}
+	{% endfor %}
+	<br>
+{% endfor %}

@@ -31,6 +31,7 @@
             {% if document.author == user %}
             <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
             </a></li>
+            <br><br>
             {% endif %}
         {% endfor %}
         </ul>
@@ -53,14 +54,13 @@
         These are the friends
     {% endif %}
 
-    <h2>Albums </h2>
+    
     {% if albums %}
-        {% for album in albums %}
-        <a href="{% url 'album' album_name=album.album_name %}">
-            <h3>{{ album.album_name }}</h3></a>
-        {% endfor %}
+        <a href="{% url 'album_list' username=user %}">
+        <h2>Albums </h2>
+        </a>
     {% else %}
-        <p> no albums </p>
+        <h2> No Albums </h2>
     {% endif %}
 
 {% endblock %}
