@@ -50,7 +50,7 @@ def signup(request):
     return render(request, 'register.html', {'form':form})
 
 def profile(request, username):
-    
+
     documents = Photos.objects.all()
     user = User.objects.get(username=username)
     cuser = User.objects.get(username=request.user)
@@ -60,7 +60,7 @@ def profile(request, username):
     return render(request, 'profile.html', args)
 
 #def get_user_profile(request):
-    
+
 
 def model_form_upload(request):
     if request.method == 'POST':

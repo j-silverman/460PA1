@@ -13,7 +13,7 @@ class Photos(models.Model):
 
     author = models.ForeignKey(User)
 
-# class Users(models.Model):
+class Users(models.Model):
 
     author = models.ForeignKey(User)
 
