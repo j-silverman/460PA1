@@ -59,6 +59,11 @@ def profile(request, username):
     args = {'documents':documents, 'albums':albums, 'user': user, 'friends':friends, 'cuser':cuser }
     return render(request, 'profile.html', args)
 
+def picture(request, document):
+    document = Photos.objects.get(caption=document)
+    args = {'document':document}
+    return render(request, 'picture.html', args)
+
 #def get_user_profile(request):
 
 
@@ -87,13 +92,15 @@ def album_upload(request):
     return render(request, 'album_upload.html', {'form':form})
 
 def album_list(request, username):
-    user = User.objects.get(username=username)
-    documents = Photos.objects.all()
-    #albums = Album.objects.all()
-    albums = Album.objects.filter(a_author = user)
-    args = {'user':user, 'documents':documents, 'albums': albums}
+    if request.method == 'GET':
+        user = User.objects.get(username=username)
+        documents = Photos.objects.all()
+        #albums = Album.objects.all()
+        albums = Album.objects.filter(a_author = user)
+        args = {'user':user, 'documents':documents, 'albums': albums}
     return render(request, 'album_list.html', args)
 
+  
 
 def change_friends(request, operation, pk):
     user = User.objects.get(username=request.user)

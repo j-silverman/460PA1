@@ -20,6 +20,13 @@ class Photos(models.Model):
     
     def __str__(self):
         return self.caption
+    
+class Comment(models.Model):
+    picture = models.ForeignKey(Photos, null = True)
+    album = models.ForeignKey(Album, null = True)
+    author = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(auto_now_add =True)
         
         
 

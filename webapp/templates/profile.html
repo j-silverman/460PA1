@@ -29,6 +29,7 @@
         <ul>
         {% for document in documents %}
             {% if document.author == user %}
+            <a href= "{%url 'picture' document=document %}">
             <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
             </a></li>
             <br><br>
@@ -43,15 +44,25 @@
     <h2>Friends</h2>
     {% if user == cuser %}
         {% for friend in friends %}
-        <a href="{% url 'profile' username=friend %}" >
-            <h3>{{ friend.username }}</h3>
-        </a>
+            {% if friend != cuser %}
+                <a href="{% url 'profile' username=friend %}" >
+                <h3>{{ friend.username }}</h3>
+                </a>
+
+             {% endif %}
 
     {% endfor %}
 
     {% else %}
 
-        These are the friends
+     {% for friend in friends %}
+        {% if friend != user %}
+        <a href="{% url 'profile' username=friend %}" >
+            <h3>{{ friend.username }}</h3>
+        </a>
+        {% endif %}
+
+    {% endfor %}
     {% endif %}
 
     
