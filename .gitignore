@@ -1,0 +1,5 @@
+#Ignore all .pyc files
+*.pyc
+
+#Ignore myproject/settings.py
+*myproject/settings.py
