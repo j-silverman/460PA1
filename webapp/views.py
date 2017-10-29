@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from webapp.forms import SignUpForm, PhotoForm, AlbumForm
-from webapp.models import Photos, Friend, Album
+from webapp.forms import SignUpForm, PhotoForm, AlbumForm, CommentForm
+from webapp.models import Photos, Friend, Album, Comment
 from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
 from django.contrib.auth import login, authenticate
@@ -61,7 +61,8 @@ def profile(request, username):
 
 def picture(request, document):
     document = Photos.objects.get(caption=document)
-    args = {'document':document}
+    comments = Comment.objects.filter(picture_id=document)
+    args = {'document':document, 'comments':comments}
     return render(request, 'picture.html', args)
 
 #def get_user_profile(request):
@@ -111,5 +112,19 @@ def change_friends(request, operation, pk):
     elif operation == 'remove':
         Friend.lose_friend(request.user, new_friend)
     return render(request, 'home.html', args)
+
+def add_comment_to_post(request, pk):
+    photo = Photos.objects.get(pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.picture = photo
+            comment.save()
+            return HttpResponseRedirect('')
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_post.html', {'form':form})
+            
     
 

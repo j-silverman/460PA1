@@ -16,7 +16,8 @@ urlpatterns = [
     url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', views.change_friends, name= 'change_friends'),
     url(r'album/$', views.album_upload, name = 'album_up'),
     url(r'^album/(?P<username>[a-zA-Z0-9]+)$', views.album_list, name = 'album_list'),
-    url(r'^picture/(?P<document>[a-zA-Z0-9]+)$', views.picture, name = 'picture')
+    url(r'^picture/(?P<document>[a-zA-Z0-9]+)$', views.picture, name = 'picture'),
+    url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
     ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

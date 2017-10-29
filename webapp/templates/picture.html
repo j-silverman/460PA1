@@ -1,1 +1,13 @@
 <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
+
+<hr>
+{% for com in comments %}
+    <div class="comment">
+        <div class="date">{{ com.created_date }}</div>
+        <strong>{{ com.author }}</strong>
+        <p>{{ com.text|linebreaks }}</p>
+    </div>
+{% empty %}
+    <p>No comments here yet :(</p>
+{% endfor %}
+<a class="btn btn-default" href="{% url 'add_comment_to_post' pk=document.pk %}">Add comment</a>
