@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
     <head>
@@ -190,3 +191,35 @@
 
 
 </html>
+=======
+{% extends 'base.html' %}
+ {% block content %}
+
+ Name:<br>
+  	<form method="GET" action='' >
+	<input type="text" name='q' placeholder="Search names" value="{{ request.GET.q }}" /> 
+ 	<input type="submit" value='search'/>
+	</form>
+
+Tags:<br>
+  <form type="GET" action=".">
+  <input id="search_tags" type="text" name="search_tags">
+  <button id="search_submit" type="submit">Search</button>
+ </form>
+
+Albums:<br>
+  <form type="GET" action=".">
+  <input id="search_albums" type="text" name="search_albums">
+  <button id="search_submit" type="submit">Search</button>
+ </form>
+{% if queryset %}
+	{% for result in queryset %}
+	    <a href="{% url 'profile' username=result %}" >
+        <h3>{{ result }}</h3>
+        </a>
+	{% endfor %}
+{% endif %}
+
+ {% endblock %}
+
+>>>>>>> origin/master
