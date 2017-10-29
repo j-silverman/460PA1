@@ -129,11 +129,16 @@ def add_comment_to_post(request, pk):
             
 
 def search(request):
+    queryset = User.objects.values_list('username', flat=True)
+    query = request.GET.get("q")
+    if query:
+        queryset = queryset.filter(username__icontains = query)
+        context = {'queryset':queryset}
+        return render(request, 'search.html', context)
     return render(request, 'search.html')
-
-def name_search(query_name):
-    qs = User.objects.all()
+def name_search(request, query_name):
+    queryset = User.objects.all()
     for term in query_name.split():
-        qs = qs.filter(Q(first_name__icontains = term)  | Q(last_name__icontains = term))
-    return HttpResponse("yeahh!!")
+        queryset = queryset.filter(Q(first_name__icontains = term)  | Q(last_name__icontains = term))
+    return render(request, 'search.html', {'queryset':queryset})
 

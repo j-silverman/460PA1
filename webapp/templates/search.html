@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
  {% block content %}
+
  Name:<br>
-  <form id="searchform" action="{% url 'name_search' %}" method="get">
-  <input id="search_name" type="text" name="q">
-  <button id="search_submit" type="submit">Search</button>
- </form>
+  	<form method="GET" action='' >
+	<input type="text" name='q' placeholder="Search names" value="{{ request.GET.q }}" /> 
+ 	<input type="submit" value='search'/>
+	</form>
 
 Tags:<br>
   <form type="GET" action=".">
@@ -17,6 +18,13 @@ Albums:<br>
   <input id="search_albums" type="text" name="search_albums">
   <button id="search_submit" type="submit">Search</button>
  </form>
-
+{% if queryset %}
+	{% for result in queryset %}
+	    <a href="{% url 'profile' username=result %}" >
+        <h3>{{ result }}</h3>
+        </a>
+	{% endfor %}
+{% endif %}
 
  {% endblock %}
+
