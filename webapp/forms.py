@@ -31,4 +31,5 @@ class AlbumForm(forms.ModelForm):
       #  self.fields['photo_id'].queryset = Photos.objects.filter(
        #         author_id = User.objects.get_by_natural_key)
                    
+#class AddAlbum(forms.ModelForm):
         
