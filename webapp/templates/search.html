@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+ {% block content %}
+ Name:<br>
+  <form id="searchform" action="{% url 'name_search' %}" method="get">
+  <input id="search_name" type="text" name="q">
+  <button id="search_submit" type="submit">Search</button>
+ </form>
+
+Tags:<br>
+  <form type="GET" action=".">
+  <input id="search_tags" type="text" name="search_tags">
+  <button id="search_submit" type="submit">Search</button>
+ </form>
+
+Albums:<br>
+  <form type="GET" action=".">
+  <input id="search_albums" type="text" name="search_albums">
+  <button id="search_submit" type="submit">Search</button>
+ </form>
+
+
+ {% endblock %}

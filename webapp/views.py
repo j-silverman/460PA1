@@ -9,6 +9,7 @@ from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
+from django.db.models import Q 
 
 def index(request):
     args = {'user': request.user}
@@ -126,5 +127,13 @@ def add_comment_to_post(request, pk):
         form = CommentForm()
     return render(request, 'add_comment_to_post.html', {'form':form})
             
-    
+
+def search(request):
+    return render(request, 'search.html')
+
+def name_search(query_name):
+    qs = User.objects.all()
+    for term in query_name.split():
+        qs = qs.filter(Q(first_name__icontains = term)  | Q(last_name__icontains = term))
+    return HttpResponse("yeahh!!")
 

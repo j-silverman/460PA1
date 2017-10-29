@@ -18,6 +18,8 @@ urlpatterns = [
     url(r'^album/(?P<username>[a-zA-Z0-9]+)$', views.album_list, name = 'album_list'),
     url(r'^picture/(?P<document>[a-zA-Z0-9]+)$', views.picture, name = 'picture'),
     url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
+    url(r'search$', views.search, name = 'search'),
+    url(r'name_search$', views.name_search, name = 'name_search')
     ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

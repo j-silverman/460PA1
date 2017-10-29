@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 class Album(models.Model):
     album_name = models.CharField(max_length=50, blank = True)
