@@ -75,14 +75,14 @@ def picture(request, document):
 
 def model_form_upload(request):
     if request.method == 'POST':
-        form = PhotoForm(request.POST, request.FILES)
+        form = PhotoForm(request.user, request.POST, request.FILES)
         if form.is_valid():
             stock = form.save(commit=False)
             stock.author = request.user
             stock.save()
             return HttpResponseRedirect('')
     else:
-        form = PhotoForm()
+        form = PhotoForm(request.user)
     return render(request, 'model_form_upload.html', {'form':form})
 
 def album_upload(request):

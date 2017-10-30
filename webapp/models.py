@@ -11,13 +11,16 @@ class Album(models.Model):
     date_created = models.DateTimeField(auto_now_add = True)
     date_modified = models. DateTimeField(auto_now = True)
     a_author = models.ForeignKey(User)
+    
+    def __str__(self):
+        return self.album_name
 
 class Photos(models.Model):
     caption = models.CharField(max_length=255, blank=True)
     photo_data = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User)
-    album_id = models.ForeignKey(Album, null = True)
+    album_id = models.ForeignKey(Album)
 
     def __str__(self):
         return self.caption

@@ -16,9 +16,14 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name','last_name','email','home_town','gender','date_of_birth','password1','password2')
 
 class PhotoForm(forms.ModelForm):
+    def __init__(self, user, *args, **kwargs):
+        super(PhotoForm, self).__init__(*args, **kwargs)
+        self.fields['album_id'].queryset = Album.objects.filter(a_author=user)
+    
     class Meta:
         model = Photos
-        fields = ('caption','photo_data')
+        fields = ('caption','photo_data','album_id')
+        
         
         
 class AlbumForm(forms.ModelForm):
