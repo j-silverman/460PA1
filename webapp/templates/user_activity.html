@@ -1,12 +1,13 @@
-<<<<<<< HEAD
+
 User Activity
 
 <html>
+<meta charset="UTF-8">
   {% for result in tag_count %}
     <br>
+    <a href = "{% url 'tag_list' tag=result %}">
     {{ result }}
+    </a>
   {% endfor %}
 </html>
-=======
-User A
->>>>>>> origin/master
+
