@@ -1,0 +1,5 @@
+<h1> {{ tag }}</h1>
+<br>
+{% for document in documents %}
+	<img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
+{% endfor %}

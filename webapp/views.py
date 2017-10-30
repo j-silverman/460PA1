@@ -161,3 +161,11 @@ def add_tag(request, pk):
         form = TagForm()
     return render(request, 'add_tag.html', {'form':form})
 
+def tag_list(request, tag):
+    tags = Tag.objects.filter(tag_text = tag).values('photo_id')
+    print(tags)
+    if request.method == 'GET':
+        documents = Photos.objects.filter(pk__in = tags)
+        args = {'documents':documents, 'tag':tag}
+    return render(request, 'tag_list.html', args)
+
