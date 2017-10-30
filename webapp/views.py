@@ -135,14 +135,20 @@ def add_comment_to_post(request, pk):
 
 def search(request):
     query = request.GET.get("q")
+    query1 = request.GET.get("qt")
     query2 = request.GET.get("qa")
     if query:
         queryset = User.objects.values_list('username', flat=True)
         queryset = queryset.filter(username__icontains = query)
         context = {'queryset':queryset}
         return render(request, 'search.html', context)
+    elif query1:
+        queryset1 = Tag.objects.filter(tag_text__icontains = query1)
+        context = {'queryset1':queryset1}
+        return render(request, 'search.html', context)
     elif query2:
         queryset2 = Album.objects.all()
+        print(queryset2)
         queryset2 = queryset2.filter(album_name__icontains = query2)
         context = {'queryset2':queryset2}
         return render(request, 'search.html', context)

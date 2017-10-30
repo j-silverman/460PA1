@@ -30,9 +30,9 @@
 	</form>
 
 Tags:<br>
-  <form type="GET" action=".">
-  <input id="search_tags" type="text" name="search_tags">
-  <button id="search_submit" type="submit">Search</button>
+  <form type="GET" action="">
+  <input type="text" name="qt" placeholder="Search tags" value="{{ request.GET.qt }}"/>
+  <input type="submit" value='search'/>
  </form>
 
 Albums:<br>
@@ -43,6 +43,14 @@ Albums:<br>
 {% if queryset %}
 	{% for result in queryset %}
 	    <a href="{% url 'profile' username=result %}" >
+        <h3>{{ result }}</h3>
+        </a>
+	{% endfor %}
+{% endif %}
+
+{% if queryset1 %}
+	{% for result in queryset1 %}
+	    <a href="{% url 'tag_list' tag=result.tag_text %}" >
         <h3>{{ result }}</h3>
         </a>
 	{% endfor %}
