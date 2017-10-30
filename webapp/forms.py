@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from webapp.models import Photos, Album, Comment
+from webapp.models import Photos, Album, Comment, Tag
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length = 20)
@@ -38,3 +38,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('author', 'text',)
+        
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ('tag_text',)
+        

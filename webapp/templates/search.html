@@ -14,15 +14,23 @@ Tags:<br>
  </form>
 
 Albums:<br>
-  <form type="GET" action=".">
-  <input id="search_albums" type="text" name="search_albums">
-  <button id="search_submit" type="submit">Search</button>
+  <form method="GET" action="">
+  <input type="text" name="qa" placeholder="Search Albums" value="{{ request.GET.qa }}">
+  <input type="submit" value="search"/>
  </form>
 {% if queryset %}
 	{% for result in queryset %}
 	    <a href="{% url 'profile' username=result %}" >
         <h3>{{ result }}</h3>
         </a>
+	{% endfor %}
+{% endif %}
+
+{% if queryset2 %}
+	{% for result in queryset2 %}
+	    <a href="{% url 'album_list' username=result.a_author %}" >
+        <h3>{{ result.album_name }}</h3>
+   		</a>
 	{% endfor %}
 {% endif %}
 

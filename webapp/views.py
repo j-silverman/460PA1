@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from webapp.forms import SignUpForm, PhotoForm, AlbumForm, CommentForm
-from webapp.models import Photos, Friend, Album, Comment
+from webapp.forms import SignUpForm, PhotoForm, AlbumForm, CommentForm, TagForm
+from webapp.models import Photos, Friend, Album, Comment, Tag
 from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
 from django.contrib.auth import login, authenticate
@@ -54,16 +54,21 @@ def profile(request, username):
     albums = Album.objects.all()
     documents = Photos.objects.all()
     user = User.objects.get(username=username)
-    cuser = User.objects.get(username=request.user)
-    friend = Friend.objects.get(current_user=request.user)
-    friends = friend.users.all()
-    args = {'documents':documents, 'albums':albums, 'user': user, 'friends':friends, 'cuser':cuser }
+    if request.user.is_authenticated:
+        cuser = User.objects.get(username=request.user)
+        friend = Friend.objects.get(current_user=request.user)
+        friends = friend.users.all()
+        print(cuser)
+        args = {'documents':documents, 'albums':albums, 'user': user, 'friends':friends, 'cuser':cuser }
+    else:
+        args = {'documents':documents, 'albums':albums, 'user': user}
     return render(request, 'profile.html', args)
 
 def picture(request, document):
     document = Photos.objects.get(caption=document)
     comments = Comment.objects.filter(picture_id=document)
-    args = {'document':document, 'comments':comments}
+    tags = Tag.objects.filter(photo_id=document)
+    args = {'document':document, 'comments':comments, 'tags':tags}
     return render(request, 'picture.html', args)
 
 #def get_user_profile(request):
@@ -129,16 +134,30 @@ def add_comment_to_post(request, pk):
             
 
 def search(request):
-    queryset = User.objects.values_list('username', flat=True)
     query = request.GET.get("q")
+    query2 = request.GET.get("qa")
     if query:
+        queryset = User.objects.values_list('username', flat=True)
         queryset = queryset.filter(username__icontains = query)
         context = {'queryset':queryset}
         return render(request, 'search.html', context)
+    elif query2:
+        queryset2 = Album.objects.all()
+        queryset2 = queryset2.filter(album_name__icontains = query2)
+        context = {'queryset2':queryset2}
+        return render(request, 'search.html', context)
     return render(request, 'search.html')
-def name_search(request, query_name):
-    queryset = User.objects.all()
-    for term in query_name.split():
-        queryset = queryset.filter(Q(first_name__icontains = term)  | Q(last_name__icontains = term))
-    return render(request, 'search.html', {'queryset':queryset})
+
+def add_tag(request, pk):
+    photo = Photos.objects.get(pk = pk)
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+        if form.is_valid():
+            tag = form.save(commit=False)
+            tag.photo_id = photo
+            tag.save()
+            return HttpResponseRedirect('')
+    else:
+        form = TagForm()
+    return render(request, 'add_tag.html', {'form':form})
 

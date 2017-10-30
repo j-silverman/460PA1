@@ -1,5 +1,13 @@
 <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
-
+<a href="{% url 'add_tag' pk=document.pk %}">
+<h3> Add Tag </h3>
+</a>
+<hr>
+{% for tag in tags %}
+	{{ tag.tag_text }}
+{% empty %}
+	<p>No tags here </p>
+{% endfor %}
 <hr>
 {% for com in comments %}
     <div class="comment">

@@ -22,6 +22,10 @@ class Photos(models.Model):
     def __str__(self):
         return self.caption
     
+class Tag(models.Model):
+    tag_text = models.CharField(max_length = 20, blank = True)
+    photo_id = models.ForeignKey(Photos)
+    
 class Comment(models.Model):
     picture = models.ForeignKey(Photos, null = True)
     album = models.ForeignKey(Album, null = True)
