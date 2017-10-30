@@ -20,7 +20,8 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
     url(r'search$', views.search, name = 'search'),
     url(r'^post/(?P<pk>\d+)/add_tag/$', views.add_tag, name = 'add_tag'),
-    url(r'^tag_list/(?P<tag>[a-zA-Z0-9]+)$', views.tag_list, name = 'tag_list')
+    url(r'^tag_list/(?P<tag>[a-zA-Z0-9]+)$', views.tag_list, name = 'tag_list'),
+    url(r'^user_activity', views.user_activity, name = 'user_activity')
     ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

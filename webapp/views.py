@@ -175,3 +175,6 @@ def tag_list(request, tag):
         args = {'documents':documents, 'tag':tag}
     return render(request, 'tag_list.html', args)
 
+
+def user_activity(request):
+    return render(request, 'user_activity.html')

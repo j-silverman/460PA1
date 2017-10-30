@@ -51,7 +51,7 @@ Albums:<br>
 {% if queryset1 %}
 	{% for result in queryset1 %}
 	    <a href="{% url 'tag_list' tag=result.tag_text %}" >
-        <h3>{{ result }}</h3>
+        <h3>{{ result.tag_text }}</h3>
         </a>
 	{% endfor %}
 {% endif %}
