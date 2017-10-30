@@ -56,9 +56,8 @@ def profile(request, username):
     user = User.objects.get(username=username)
     if request.user.is_authenticated:
         cuser = User.objects.get(username=request.user)
-        friend = Friend.objects.get(current_user=request.user)
+        friend, created = Friend.objects.get_or_create(current_user=request.user)
         friends = friend.users.all()
-        print(cuser)
         args = {'documents':documents, 'albums':albums, 'user': user, 'friends':friends, 'cuser':cuser }
     else:
         args = {'documents':documents, 'albums':albums, 'user': user}
@@ -178,7 +177,9 @@ def search(request):
         queryset3 = Comment.objects.filter(text__icontains = query3)
         print(queryset3)
         context = {'queryset3':queryset3}
-    return render(request, 'search.html', context)
+        return render(request, 'search.html', context)
+    else:
+        return render(request, 'search.html')
 
 def add_tag(request, pk):
     photo = Photos.objects.get(pk = pk)
@@ -204,15 +205,16 @@ def tag_list(request, tag):
 
 def user_activity(request):
     tag_count = Tag.objects.all().values_list('tag_text').annotate(total = Count('tag_text')).order_by('-total')
-    tag_count = tag_count.all().values_list('tag_text')
     tag_count = [str(x[0]) for x in tag_count]
     context = {'tag_count':tag_count}
     return render(request, 'user_activity.html', context)
 
 def useractivity1(request):
-    authors = Photos.objects.all().values('author').annotate(total=Count('author')).order_by('-total')
-    authors = authors.all().values('author')
-    users = User.objects.all()
-    context = {'authors':authors, 'users':users}
+    authors = Photos.objects.all().values_list('author').annotate(total=Count('author')).order_by('-total')
+    authors = authors.all()[:5]
+    print(authors[0])
+    author = [int(x[0]) for x in authors]
+    users = User.objects.filter(pk__in=author)
+    context = {'users':users}
     return render(request, 'thing.html', context)
 

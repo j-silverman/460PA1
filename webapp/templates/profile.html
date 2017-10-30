@@ -14,7 +14,7 @@
         <a href="{% url 'album_up' %}"> Create an album </a>
     {% else %}
         {% if user in friends %}
-            <a href="{% url 'change_friends' operation='remove'  pk=user.pk %}">
+            <a href="{%url 'change_friends' operation='remove'  pk=user.pk %}">
             <button type="button" class="btn btn-default">Unfriend</button>
             </a>
         {% else %}
@@ -29,8 +29,9 @@
         <ul>
         {% for document in documents %}
             {% if document.author == user %}
+            <a href="{%url 'picture' document=document %}" >
             <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
-            </li>
+            </a></li>
             <br><br>
             {% endif %}
         {% endfor %}

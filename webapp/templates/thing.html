@@ -1,12 +1,8 @@
 User Activity
 
-{% for result in authors %}
-	{% for user in users %}
-		{% if result.author == user.id %}
-			<br>
-			<a href="{% url 'profile' username=user.username %}" >
-        	<h3>{{ user.username }}</h3>
-   			</a>
-		{% endif %}
-	{% endfor %}
+{% for user in users %}
+	<br>
+	<a href= "{% url 'profile' username=user %}">
+	{{ user }}
+	</a>
 {% endfor %}
