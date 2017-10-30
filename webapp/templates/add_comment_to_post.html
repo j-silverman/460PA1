@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
+
+
 {% block content %}
+{% if puser.author_id == user.id %}
+	<h3>Cannot Comment on Your Own Post </h3>
+{% else %}
     <h1>New comment</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Send</button>
     </form>
+{% endif %}
 {% endblock %}

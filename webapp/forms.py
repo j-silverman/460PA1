@@ -39,6 +39,13 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('author', 'text',)
         
+        
+        
+class LoggedInCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)
+        
 class TagForm(forms.ModelForm):
     class Meta:
         model = Tag

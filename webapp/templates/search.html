@@ -40,6 +40,13 @@ Albums:<br>
   <input type="text" name="qa" placeholder="Search Albums" value="{{ request.GET.qa }}">
   <input type="submit" value="search"/>
  </form>
+
+ Comments:<br>
+  <form method="GET" action="">
+  <input type="text" name="qc" placeholder="Search Comments" value="{{ request.GET.qc }}">
+  <input type="submit" value="search"/>
+ </form>
+
 {% if queryset %}
 	{% for result in queryset %}
 	    <a href="{% url 'profile' username=result %}" >
@@ -63,6 +70,15 @@ Albums:<br>
    		</a>
 	{% endfor %}
 {% endif %}
+
+{% if queryset3 %}
+	{% for result in queryset3 %}
+	    <a href="{% url 'profile' username=result.author %}" >
+        <h3>{{ result.author }}</h3>
+   		</a>
+	{% endfor %}
+{% endif %}
+
 
 {% endblock %}
 

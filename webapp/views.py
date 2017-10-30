@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from webapp.forms import SignUpForm, PhotoForm, AlbumForm, CommentForm, TagForm
+from webapp.forms import SignUpForm, PhotoForm, AlbumForm, CommentForm, TagForm, LoggedInCommentForm
 from webapp.models import Photos, Friend, Album, Comment, Tag
 from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
@@ -121,22 +121,41 @@ def change_friends(request, operation, pk):
 
 def add_comment_to_post(request, pk):
     photo = Photos.objects.get(pk=pk)
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.picture = photo
-            comment.save()
-            return HttpResponseRedirect('')
+    puser = Photos.objects.only('author').get(pk=pk)
+    print(puser)
+    if request.user.is_authenticated:
+        user = User.objects.get(username = request.user)
+        if request.method == "POST":
+            form = LoggedInCommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.picture = photo
+                comment.author = user
+                comment.save()
+                return HttpResponseRedirect('')
+        else:
+            form = LoggedInCommentForm()
+            args = {'form':form, 'puser':puser,'user':user}
+        return render(request, 'add_comment_to_post.html', args)
+            
     else:
-        form = CommentForm()
-    return render(request, 'add_comment_to_post.html', {'form':form})
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.picture = photo
+                comment.save()
+                return HttpResponseRedirect('')
+        else:
+            form = CommentForm()
+        return render(request, 'add_comment_to_post.html', {'form':form})
             
 
 def search(request):
     query = request.GET.get("q")
     query1 = request.GET.get("qt")
     query2 = request.GET.get("qa")
+    query3 = request.GET.get("qc")
     if query:
         queryset = User.objects.values_list('username', flat=True)
         queryset = queryset.filter(username__icontains = query)
@@ -152,7 +171,11 @@ def search(request):
         queryset2 = queryset2.filter(album_name__icontains = query2)
         context = {'queryset2':queryset2}
         return render(request, 'search.html', context)
-    return render(request, 'search.html')
+    elif query3:
+        queryset3 = Comment.objects.filter(text__icontains = query3)
+        print(queryset3)
+        context = {'queryset3':queryset3}
+    return render(request, 'search.html', context)
 
 def add_tag(request, pk):
     photo = Photos.objects.get(pk = pk)
