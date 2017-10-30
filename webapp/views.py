@@ -9,7 +9,7 @@ from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.db.models import Q 
+from django.db.models import Q, Count
 
 def index(request):
     args = {'user': request.user}
@@ -201,3 +201,10 @@ def tag_list(request, tag):
 
 def user_activity(request):
     return render(request, 'user_activity.html')
+
+def useractivity1(request):
+    authors = Photos.objects.all().values('author').annotate(total=Count('author')).order_by('-total')
+    authors = authors.all().values('author')
+    users = User.objects.all()
+    context = {'authors':authors, 'users':users}
+    return render(request, 'thing.html', context)
