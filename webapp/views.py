@@ -9,7 +9,7 @@ from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.db.models import Q 
+from django.db.models import Q, Count
 
 def index(request):
     args = {'user': request.user}
@@ -107,7 +107,7 @@ def album_list(request, username):
         args = {'user':user, 'documents':documents, 'albums': albums}
     return render(request, 'album_list.html', args)
 
-  
+
 
 def change_friends(request, operation, pk):
     user = User.objects.get(username=request.user)
@@ -139,6 +139,7 @@ def add_comment_to_post(request, pk):
         return render(request, 'add_comment_to_post.html', args)
             
     else:
+<<<<<<< Updated upstream
         if request.method == "POST":
             form = CommentForm(request.POST)
             if form.is_valid():
@@ -150,6 +151,11 @@ def add_comment_to_post(request, pk):
             form = CommentForm()
         return render(request, 'add_comment_to_post.html', {'form':form})
             
+=======
+        form = CommentForm()
+    return render(request, 'add_comment_to_post.html', {'form':form})
+
+>>>>>>> Stashed changes
 
 def search(request):
     query = request.GET.get("q")
@@ -200,4 +206,11 @@ def tag_list(request, tag):
 
 
 def user_activity(request):
-    return render(request, 'user_activity.html')
+    # total
+    tag_count = Tag.objects.all().values('tag_text').annotate(total = Count('tag_text')).order_by('-total')
+    context = {'tag_count':tag_count}
+    print(tag_count)
+
+
+
+    return render(request, 'user_activity.html', context)

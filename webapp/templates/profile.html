@@ -29,9 +29,8 @@
         <ul>
         {% for document in documents %}
             {% if document.author == user %}
-            <a href= "{%url 'picture' document=document %}">
             <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
-            </a></li>
+            </li>
             <br><br>
             {% endif %}
         {% endfor %}
@@ -65,7 +64,7 @@
     {% endfor %}
     {% endif %}
 
-    
+
     {% if albums %}
         <a href="{% url 'album_list' username=user %}">
         <h2>Albums </h2>
@@ -75,4 +74,3 @@
     {% endif %}
 
 {% endblock %}
-
