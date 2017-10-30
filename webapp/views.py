@@ -203,6 +203,7 @@ def tag_list(request, tag):
 
 
 def user_activity(request):
+<<<<<<< HEAD
     # total
     tag_count = Tag.objects.all().values_list('tag_text').annotate(total = Count('tag_text')).order_by('-total')
     #tag_count = tag_count.all().values_list('tag_text')
@@ -213,3 +214,13 @@ def user_activity(request):
 
 
     return render(request, 'user_activity.html', context)
+=======
+    return render(request, 'user_activity.html')
+
+def useractivity1(request):
+    authors = Photos.objects.all().values('author').annotate(total=Count('author')).order_by('-total')
+    authors = authors.all().values('author')
+    users = User.objects.all()
+    context = {'authors':authors, 'users':users}
+    return render(request, 'thing.html', context)
+>>>>>>> origin/master
