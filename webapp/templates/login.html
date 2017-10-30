@@ -36,7 +36,7 @@
         </div>
       </nav>
       {% endif %}
-      <span class="w3-button w3-xxlarge w3-white w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+      <span class="w3-button w3-xxlarge w3-#618BBE w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></span>
 
         <script>
 
@@ -179,26 +179,25 @@
       <input type="text" placeholder="username" name="username" value="" size="50" />
       <input type="password" name="password" value="" size="50" />
       <input type="submit" value="login" />
-      <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
     </form>
   </div>
 </div>
 
 <script>
 
-function w3_open() {
-    document.getElementById("mySidebar").style.width = "100%";
-    document.getElementById("mySidebar").style.display = "block";
-}
+  function w3_open() {
+      document.getElementById("mySidebar").style.width = "100%";
+      document.getElementById("mySidebar").style.display = "block";
+  }
 
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-}
+  function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+  }
 
 
-  $('.message a').click(function(){
-     $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-  });
+    $('.message a').click(function(){
+       $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
 
 </script>
 
