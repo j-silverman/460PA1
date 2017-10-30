@@ -18,22 +18,25 @@ class Photos(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User)
     album_id = models.ForeignKey(Album, null = True)
-    
+
     def __str__(self):
         return self.caption
-    
+
 class Tag(models.Model):
     tag_text = models.CharField(max_length = 20, blank = True)
     photo_id = models.ForeignKey(Photos)
-    
+
+    def __str__(self):
+        return self.tag_text
+
 class Comment(models.Model):
     picture = models.ForeignKey(Photos, null = True)
     album = models.ForeignKey(Album, null = True)
     author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add =True)
-        
-        
+
+
 
 class Friend(models.Model):
     users = models.ManyToManyField(User)                    #friends of current user

@@ -137,9 +137,8 @@ def add_comment_to_post(request, pk):
             form = LoggedInCommentForm()
             args = {'form':form, 'puser':puser,'user':user}
         return render(request, 'add_comment_to_post.html', args)
-            
+
     else:
-<<<<<<< Updated upstream
         if request.method == "POST":
             form = CommentForm(request.POST)
             if form.is_valid():
@@ -150,12 +149,10 @@ def add_comment_to_post(request, pk):
         else:
             form = CommentForm()
         return render(request, 'add_comment_to_post.html', {'form':form})
-            
-=======
+
         form = CommentForm()
     return render(request, 'add_comment_to_post.html', {'form':form})
 
->>>>>>> Stashed changes
 
 def search(request):
     query = request.GET.get("q")
@@ -207,9 +204,11 @@ def tag_list(request, tag):
 
 def user_activity(request):
     # total
-    tag_count = Tag.objects.all().values('tag_text').annotate(total = Count('tag_text')).order_by('-total')
+    tag_count = Tag.objects.all().values_list('tag_text').annotate(total = Count('tag_text')).order_by('-total')
+    #tag_count = tag_count.all().values_list('tag_text')
+
+
     context = {'tag_count':tag_count}
-    print(tag_count)
 
 
 
