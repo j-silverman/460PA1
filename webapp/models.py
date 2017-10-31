@@ -20,7 +20,7 @@ class Photos(models.Model):
     photo_data = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User)
-    album_id = models.ForeignKey(Album)
+    album_id = models.ForeignKey(Album, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.caption
@@ -35,7 +35,7 @@ class Tag(models.Model):
 
 class Comment(models.Model):
     picture = models.ForeignKey(Photos, on_delete=models.CASCADE)
-    album = models.ForeignKey(Album, null = True)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
     author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add =True)

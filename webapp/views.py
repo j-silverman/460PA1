@@ -102,10 +102,11 @@ def album_upload(request):
 def album_list(request, username):
     if request.method == 'GET':
         user = User.objects.get(username=username)
+        c_user = request.user
         documents = Photos.objects.all()
         #albums = Album.objects.all()
         albums = Album.objects.filter(a_author = user)
-        args = {'user':user, 'documents':documents, 'albums': albums}
+        args = {'user':user, 'documents':documents, 'albums': albums, 'c_user':c_user}
     return render(request, 'album_list.html', args)
 
 
@@ -235,6 +236,10 @@ def delete_tag(request, pk):
 
 def delete_photo(request, pk):
     u = Photos.objects.get(pk=pk).delete()
-    return HttpResponseRedirect(reverse('index'))     
+    return HttpResponseRedirect(reverse('index'))    
+
+def delete_album(request, pk):
+    u = Album.objects.get(pk=pk).delete()
+    return HttpResponseRedirect(reverse('index')) 
     
 

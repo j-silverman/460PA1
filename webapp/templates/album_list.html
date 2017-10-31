@@ -1,6 +1,11 @@
 <h1> Albums <h1>
 {% for album in albums %}
 	{{ album.album_name }}
+	{% if album.a_author == c_user %}
+	<a href = "{% url 'delete_album' pk=album.pk %}">
+	<button type="Search">Delete</button>
+	</a>
+	{% endif %}
 	<br>
 	{% for document in documents %}
 

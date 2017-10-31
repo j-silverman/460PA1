@@ -25,7 +25,8 @@ urlpatterns = [
     url(r'^thing', views.useractivity1, name = 'thing'),
     url(r'^might_like', views.might_like, name = 'might_like'),
     url(r'^delete_tag/(?P<pk>\d+)', views.delete_tag, name = 'delete_tag'),
-    url(r'^delete_photo/(?P<pk>\d+)', views.delete_photo, name = 'delete_photo')
+    url(r'^delete_photo/(?P<pk>\d+)', views.delete_photo, name = 'delete_photo'),
+    url(r'^delete_album/(?P<pk>\d+)', views.delete_album, name = 'delete_album')
     ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
