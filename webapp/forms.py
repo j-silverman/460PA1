@@ -13,8 +13,8 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name','last_name','email','home_town','gender','date_of_birth','password1','password2')
-
+        fields = ('username', 'first_name','last_name','email','home_town','gender','date_of_birth','password1','password2')    
+    
 class PhotoForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super(PhotoForm, self).__init__(*args, **kwargs)

@@ -13,7 +13,8 @@ from django.db.models import Q, Count
 from django.core.urlresolvers import reverse
 
 def index(request):
-    args = {'user': request.user}
+    documents = Photos.objects.all()
+    args = {'user': request.user, 'documents':documents}
     return render(request, 'home.html', args)
 
 #def register(request):
