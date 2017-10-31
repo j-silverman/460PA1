@@ -5,11 +5,21 @@
 </a>
 {% endif %}
 <hr>
-{% for tag in tags %}
-	<a href ="{% url 'tag_list' tag=tag.tag_text %}"> 
-	{{ tag.tag_text }}
-	</a>
 
+{% for tag in tags %}
+	{% if user == document.author %}
+		<br>
+		<a href ="{% url 'tag_list' tag=tag.tag_text %}"> 
+		{{ tag.tag_text }}
+		</a>
+		<a href = "{% url 'delete_tag' pk=tag.pk %}">
+		<button type="Search">Delete</button>
+		</a>
+	{% else %}
+		<a href ="{% url 'tag_list' tag=tag.tag_text %}"> 
+		{{ tag.tag_text }}
+		</a>
+	{% endif %}
 {% empty %}
 	<p>No tags here </p>
 {% endfor %}

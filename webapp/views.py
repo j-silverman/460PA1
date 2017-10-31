@@ -10,6 +10,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.db.models import Q, Count
+from django.core.urlresolvers import reverse
 
 def index(request):
     args = {'user': request.user}
@@ -222,6 +223,16 @@ def useractivity1(request):
 
 def might_like(request):
     user = request.user
+    your_tags = Tag.objects.filter(t_user = user)
+    your_tags = your_tags.all().values_list('tag_text').annotate(total = Count('tag_text')).order_by('-total')
+    print(your_tags)
     return render(request, 'might_like.html')
+
+def delete_tag(request, pk):
+    #if request.method == "POST":
+    print(pk)
+    u = Tag.objects.get(pk=pk).delete()
+    return HttpResponseRedirect(reverse('index'))    
+        
     
 
