@@ -230,9 +230,11 @@ def might_like(request):
 
 def delete_tag(request, pk):
     #if request.method == "POST":
-    print(pk)
     u = Tag.objects.get(pk=pk).delete()
     return HttpResponseRedirect(reverse('index'))    
-        
+
+def delete_photo(request, pk):
+    u = Photos.objects.get(pk=pk).delete()
+    return HttpResponseRedirect(reverse('index'))     
     
 

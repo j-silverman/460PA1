@@ -1,5 +1,8 @@
 <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
 {% if user == document.author %}
+<a href = "{% url 'delete_photo' pk=document.pk %}">
+<button type="Search">Delete</button>
+</a>
 <a href="{% url 'add_tag' pk=document.pk %}">
 <h3> Add Tag </h3>
 </a>

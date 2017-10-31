@@ -27,14 +27,14 @@ class Photos(models.Model):
 
 class Tag(models.Model):
     tag_text = models.CharField(max_length = 20, blank = True)
-    photo_id = models.ForeignKey(Photos)
+    photo_id = models.ForeignKey(Photos, on_delete=models.CASCADE)
     t_user = models.ForeignKey(User)
 
     def __str__(self):
         return self.tag_text
 
 class Comment(models.Model):
-    picture = models.ForeignKey(Photos, null = True)
+    picture = models.ForeignKey(Photos, on_delete=models.CASCADE)
     album = models.ForeignKey(Album, null = True)
     author = models.CharField(max_length=200)
     text = models.TextField()
