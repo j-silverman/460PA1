@@ -67,7 +67,8 @@ def picture(request, document):
     document = Photos.objects.get(caption=document)
     comments = Comment.objects.filter(picture_id=document)
     tags = Tag.objects.filter(photo_id=document)
-    args = {'document':document, 'comments':comments, 'tags':tags}
+    user = request.user                         
+    args = {'document':document, 'comments':comments, 'tags':tags, 'user':user}
     return render(request, 'picture.html', args)
 
 #def get_user_profile(request):
@@ -188,6 +189,7 @@ def add_tag(request, pk):
         if form.is_valid():
             tag = form.save(commit=False)
             tag.photo_id = photo
+            tag.t_user = request.user
             tag.save()
             return HttpResponseRedirect('')
     else:
@@ -217,4 +219,9 @@ def useractivity1(request):
     users = User.objects.filter(pk__in=author)
     context = {'users':users}
     return render(request, 'thing.html', context)
+
+def might_like(request):
+    user = request.user
+    return render(request, 'might_like.html')
+    
 

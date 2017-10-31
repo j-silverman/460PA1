@@ -28,6 +28,7 @@ class Photos(models.Model):
 class Tag(models.Model):
     tag_text = models.CharField(max_length = 20, blank = True)
     photo_id = models.ForeignKey(Photos)
+    t_user = models.ForeignKey(User)
 
     def __str__(self):
         return self.tag_text

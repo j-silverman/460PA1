@@ -1,7 +1,9 @@
 <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
+{% if user == document.author %}
 <a href="{% url 'add_tag' pk=document.pk %}">
 <h3> Add Tag </h3>
 </a>
+{% endif %}
 <hr>
 {% for tag in tags %}
 	<a href ="{% url 'tag_list' tag=tag.tag_text %}"> 

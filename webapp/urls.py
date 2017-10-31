@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/add_tag/$', views.add_tag, name = 'add_tag'),
     url(r'^tag_list/(?P<tag>[a-zA-Z0-9]+)$', views.tag_list, name = 'tag_list'),
     url(r'^user_activity', views.user_activity, name = 'user_activity'),
-    url(r'^thing', views.useractivity1, name = 'thing')
+    url(r'^thing', views.useractivity1, name = 'thing'),
+    url(r'^might_like', views.might_like, name = 'might_like')
     ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
