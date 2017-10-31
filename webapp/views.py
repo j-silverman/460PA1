@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from webapp.forms import SignUpForm, PhotoForm, AlbumForm, CommentForm, TagForm, LoggedInCommentForm
-from webapp.models import Photos, Friend, Album, Comment, Tag
+from webapp.models import Photos, Friend, Album, Comment, Tag, Like
 from django.template import RequestContext, Context
 from django.shortcuts import render_to_response
 from django.contrib.auth import login, authenticate
@@ -68,8 +68,12 @@ def picture(request, document):
     document = Photos.objects.get(caption=document)
     comments = Comment.objects.filter(picture_id=document)
     tags = Tag.objects.filter(photo_id=document)
-    user = request.user                         
-    args = {'document':document, 'comments':comments, 'tags':tags, 'user':user}
+    user = request.user         
+    likes = Like.objects.filter(picture=document).count()   
+    liked = Like.objects.filter(picture=document).values_list('l_user')
+    liked = [int(x[0]) for x in liked]
+    print(liked)
+    args = {'document':document, 'comments':comments, 'tags':tags, 'user':user, 'likes':likes, 'liked':liked}
     return render(request, 'picture.html', args)
 
 #def get_user_profile(request):
@@ -121,6 +125,12 @@ def change_friends(request, operation, pk):
         Friend.lose_friend(request.user, new_friend)
     return render(request, 'home.html', args)
 
+def like(request, pk):
+    photo = Photos.objects.get(pk = pk)
+    cuser = request.user
+    Like.objects.create(picture = photo, l_user = cuser)
+    return HttpResponseRedirect(reverse('index'))
+
 def add_comment_to_post(request, pk):
     photo = Photos.objects.get(pk=pk)
     puser = Photos.objects.only('author').get(pk=pk)
@@ -154,6 +164,8 @@ def add_comment_to_post(request, pk):
 
         form = CommentForm()
     return render(request, 'add_comment_to_post.html', {'form':form})
+
+
 
 
 def search(request):
@@ -241,5 +253,11 @@ def delete_photo(request, pk):
 def delete_album(request, pk):
     u = Album.objects.get(pk=pk).delete()
     return HttpResponseRedirect(reverse('index')) 
+
+def unlike(request, pk):
+    user = request.user
+    like = Like.objects.filter(l_user = user)
+    u = like.get(picture=pk).delete()
+    return HttpResponseRedirect(reverse('index'))
     
 

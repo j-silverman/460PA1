@@ -1,3 +1,5 @@
+<h3> {{ document.caption }} </h3>
+
 <img src="{{ document.photo_data.url }}" alt="img" class="img-responsive img-rounded" width="50%" height="50%">
 {% if user == document.author %}
 <a href = "{% url 'delete_photo' pk=document.pk %}">
@@ -26,6 +28,20 @@
 {% empty %}
 	<p>No tags here </p>
 {% endfor %}
+<hr>
+
+{% if user.id in liked %}
+<a href = "{% url 'unlike' pk=document.pk %}">
+Unlike
+</a>
+{% else %}
+<a href = "{% url 'like' pk=document.pk %}">
+Like
+</a>
+{% endif %}
+<br>
+Likes = {{ likes }}
+
 <hr>
 {% for com in comments %}
     <div class="comment">

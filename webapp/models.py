@@ -35,12 +35,14 @@ class Tag(models.Model):
 
 class Comment(models.Model):
     picture = models.ForeignKey(Photos, on_delete=models.CASCADE)
-    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, null = True, on_delete=models.CASCADE)
     author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add =True)
-
-
+    
+class Like(models.Model):
+    picture = models.ForeignKey(Photos, on_delete=models.CASCADE)
+    l_user = models.ForeignKey(User)
 
 class Friend(models.Model):
     users = models.ManyToManyField(User)                    #friends of current user
