@@ -11,3 +11,4 @@ To run the website on localhost, enter the following in the terminal
 $ python manage.py runserver
 
 
+![ER Diagram](Winstagram_ER_diagram.png)
